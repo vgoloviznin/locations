@@ -1,6 +1,6 @@
 const { locationValidator } = require('../validators');
-const { badRequest } = require('../middleware');
-const { location } = require('../services');
+const { errors } = require('../middleware');
+const { locationService } = require('../services');
 
 
 module.exports = {
@@ -10,10 +10,10 @@ module.exports = {
     const validationResult = await locationValidator.closeLocations(locations);
 
     if (!validationResult.success) {
-      return badRequest(ctx, validationResult.error);
+      return errors.badRequest(ctx, validationResult.error);
     }
 
-    const response = await location.closeLocations(validationResult.value);
+    const response = await locationService.closeLocations(validationResult.value);
 
     ctx.body = response;
   }

@@ -1,9 +1,11 @@
 require('dotenv').config();
 
 const sinon = require('sinon');
-const { array } = require('../../helpers');
 const { assert } = require('chai');
 const { location } = require('../../controllers');
+const { locationValidator } = require('../../validators');
+const { locationService } = require('../../services');
+const { errors } = require('../../middleware');
 const fakes = require('../data/fakes');
 
 describe('Location controller test', () => {
@@ -12,22 +14,51 @@ describe('Location controller test', () => {
   });
 
   describe('- closeLocations test', () => {
-    it('- calls pairs method', () => {
+    it('- calls validator properly', async () => {
       const ctx = { request: { query: { locations: fakes.arrayForPairs } } };
-      const spy = sinon.spy(array, 'pairs');
+      const validatorStub = sinon.stub(locationValidator, 'closeLocations');
+      validatorStub.returns(fakes.falseValidation);
+      sinon.stub(errors, 'badRequest');
 
-      location.closeLocations(ctx);
+      await location.closeLocations(ctx);
 
-      sinon.assert.calledOnce(spy);
-      sinon.assert.calledWithExactly(spy, fakes.arrayForPairs);
+      sinon.assert.calledOnce(validatorStub);
+      sinon.assert.calledWithExactly(validatorStub, fakes.arrayForPairs);
     });
 
-    it('- returns pairs', () => {
+    it('- calls badRequest proeperly on failed validation', async () => {
       const ctx = { request: { query: { locations: fakes.arrayForPairs } } };
-      const stub = sinon.stub(array, 'pairs');
-      stub.returns(fakes.pairs);
+      const validatorStub = sinon.stub(locationValidator, 'closeLocations');
+      validatorStub.returns(fakes.falseValidation);
+      const badRequestStub = sinon.stub(errors, 'badRequest');
 
-      location.closeLocations(ctx);
+      await location.closeLocations(ctx);
+
+      sinon.assert.calledOnce(badRequestStub);
+      sinon.assert.calledWithExactly(badRequestStub, ctx, fakes.falseValidation.error);
+    });
+
+    it('- calls service properly', async () => {
+      const ctx = { request: { query: { locations: fakes.arrayForPairs } } };
+      const validatorStub = sinon.stub(locationValidator, 'closeLocations');
+      validatorStub.returns(fakes.trueValidation);
+      const serviceStub = sinon.stub(locationService, 'closeLocations');
+      serviceStub.returns(fakes.pairs);
+
+      await location.closeLocations(ctx);
+
+      sinon.assert.calledOnce(serviceStub);
+      sinon.assert.calledWithExactly(serviceStub, fakes.trueValidation.value);
+    });
+
+    it('- returns response properly', async () => {
+      const ctx = { request: { query: { locations: fakes.arrayForPairs } } };
+      const validatorStub = sinon.stub(locationValidator, 'closeLocations');
+      validatorStub.returns(fakes.trueValidation);
+      const serviceStub = sinon.stub(locationService, 'closeLocations');
+      serviceStub.returns(fakes.pairs);
+
+      await location.closeLocations(ctx);
 
       assert.deepEqual(ctx.body, fakes.pairs);
     });

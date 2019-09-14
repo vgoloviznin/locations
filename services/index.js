@@ -1,5 +1,5 @@
-const location = require('./location');
+const locationService = require('./location');
 
 module.exports = {
-  location
+  locationService
 };
