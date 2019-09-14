@@ -1,16 +1,10 @@
-const googleMapsClient = require('@google/maps').createClient({
-  key: process.env.GOOGLE_API_KEY,
-  Promise
-});
+const { maps } = require('../helpers');
 
 module.exports = {
   closeLocations: async (locations) => {
     const joined = locations.join('|');
 
-    const distances = await googleMapsClient.distanceMatrix({
-      origins: joined,
-      destinations: joined
-    }).asPromise();
+    const distances = await maps.distances(joined);
 
     const result = [];
 
