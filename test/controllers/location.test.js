@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const sinon = require('sinon');
 const { array } = require('../../helpers');
 const { assert } = require('chai');
