@@ -1,6 +1,11 @@
+const { array } = require('../helpers');
 
 module.exports = {
   closeLocations: (ctx) => {
-    ctx.body = ['test'];
+    const { request: { query: locations } } = ctx;
+
+    const pairs = array.pairs(locations);
+
+    ctx.body = pairs;
   }
 };
