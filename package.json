@@ -1,0 +1,28 @@
+{
+  "name": "locations",
+  "version": "0.0.1",
+  "description": "Find close-by locations",
+  "main": "app.js",
+  "dependencies": {
+    "koa": "^2.8.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.0",
+    "sinon": "^7.4.2"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --exit --recursive test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vgoloviznin/locations.git"
+  },
+  "author": "Vsevolod Goloviznin <vsevolod.goloviznin@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vgoloviznin/locations/issues"
+  },
+  "homepage": "https://github.com/vgoloviznin/locations#readme"
+}
