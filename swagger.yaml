@@ -1,0 +1,46 @@
+swagger: "2.0"
+info:
+  description: "Gets closest locations from the given array of locations provided in the API call. The app utilizes [Google Maps Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/intro) so the API support the data formats of the Matrix API."
+  version: "0.0.1"
+  title: "Locations"
+  contact:
+    email: "vsevolod.goloviznin@gmail.com"
+  license:
+    name: "MIT"
+host: "localhost:3001"
+basePath: "/"
+schemes:
+- "https"
+- "http"
+paths:
+  /locations/close:
+    get:
+      summary: "Gets closest location for each location provided"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+      - in: "query"
+        name: "locations"
+        description: "Locations"
+        type: array
+        items: 
+          type: string
+      responses:
+        400:
+          description: "Invalid input"
+        200:
+          description: "Array of locations with their closest locations"
+          schema: 
+            type: array
+            items:
+              $ref: '#/definitions/Location'
+definitions:
+  Location:
+    type: object
+    properties:
+      location:
+        type: string
+      closest:
+        type: string
