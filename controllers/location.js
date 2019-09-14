@@ -1,16 +1,20 @@
-const { array } = require('../helpers');
+const { locationValidator } = require('../validators');
+const { errors } = require('../middleware');
+const { locationService } = require('../services');
+
 
 module.exports = {
-  closeLocations: (ctx) => {
-    let { request: { query: { locations } } } = ctx;
+  closeLocations: async (ctx) => {
+    const { request: { query: { locations } } } = ctx;
 
-    // ToDo add proper validation
-    if (!Array.isArray(locations)) {
-      locations = JSON.parse(locations);
+    const validationResult = await locationValidator.closeLocations(locations);
+
+    if (!validationResult.success) {
+      return errors.badRequest(ctx, validationResult.error);
     }
 
-    const pairs = array.pairs(locations);
+    const response = await locationService.closeLocations(validationResult.value);
 
-    ctx.body = pairs;
+    ctx.body = response;
   }
 };

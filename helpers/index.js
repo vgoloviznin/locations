@@ -1,5 +1,6 @@
-const array = require('./array');
+const maps = require('./maps');
 
 module.exports = {
-  array
+  maps
 };
+

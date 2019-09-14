@@ -1,6 +1,6 @@
-const notFound = require('./not-found');
+const errors = require('./errors');
 
 module.exports = {
-  notFound
+  errors
 };
 
