@@ -20,7 +20,7 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --exit --recursive test/",
     "start": "node app",
-    "build": "npm i && npm start"
+    "build": "npm i"
   },
   "repository": {
     "type": "git",
