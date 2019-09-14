@@ -20,5 +20,5 @@ Run the app by `node app` or `npm start`.
 
 Swagger API specification is available in the repository. You can test the route by running the following request in your browser after starting the app: 
 
-`http://localhost:3001/locations/close?locations=[%22Statue%20Of%20Liberty%22,%20%22Washington%20DC%22,%22Golden%20Bridge%22,%20%22Oklahoma%22,%20%22New%20Orleans%22]`
+`https://vgoloviznin-location.herokuapp.com/locations/close?locations=[%22Statue%20Of%20Liberty%22,%20%22Washington%20DC%22,%22Golden%20Bridge%22,%20%22Oklahoma%22,%20%22New%20Orleans%22]`
 
