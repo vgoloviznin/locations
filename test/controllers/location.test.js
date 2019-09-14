@@ -11,7 +11,7 @@ describe('Location controller test', () => {
 
   describe('- closeLocations test', () => {
     it('- calls pairs method', () => {
-      const ctx = { request: { query: fakes.arrayForPairs } };
+      const ctx = { request: { query: { locations: fakes.arrayForPairs } } };
       const spy = sinon.spy(array, 'pairs');
 
       location.closeLocations(ctx);
@@ -21,7 +21,7 @@ describe('Location controller test', () => {
     });
 
     it('- returns pairs', () => {
-      const ctx = { request: { query: fakes.arrayForPairs } };
+      const ctx = { request: { query: { locations: fakes.arrayForPairs } } };
       const stub = sinon.stub(array, 'pairs');
       stub.returns(fakes.pairs);
 

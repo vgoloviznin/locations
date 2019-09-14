@@ -2,7 +2,12 @@ const { array } = require('../helpers');
 
 module.exports = {
   closeLocations: (ctx) => {
-    const { request: { query: locations } } = ctx;
+    let { request: { query: { locations } } } = ctx;
+
+    // ToDo add proper validation
+    if (!Array.isArray(locations)) {
+      locations = JSON.parse(locations);
+    }
 
     const pairs = array.pairs(locations);
 
