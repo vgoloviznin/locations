@@ -18,7 +18,8 @@
     "sinon": "^7.4.2"
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --exit --recursive test/"
+    "test": "./node_modules/.bin/mocha --exit --recursive test/",
+    "start": "node app"
   },
   "repository": {
     "type": "git",
