@@ -1,4 +1,5 @@
-async function notFound(ctx, next) {
+
+module.exports = async (ctx, next) => {
   await next();
 
   const status = ctx.status || 404;
@@ -8,6 +9,4 @@ async function notFound(ctx, next) {
       message: 'Not found'
     };
   }
-}
-
-module.exports = notFound;
+};
